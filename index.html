@@ -1,0 +1,85 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
+
+<script>
+  let products = 0;
+  let designs = 0;
+  let linesOfCode = 0;
+
+  function addProduct() {
+    products++;
+    updateView();
+  }
+
+  function addDesign() {
+    designs++;
+    updateView();
+  }
+
+  function addCode() {
+    linesOfCode++;
+    updateView();
+  }
+
+  function updateView() {
+    document.querySelector('.num-product-ideas').textContent = products;
+    document.querySelector('.num-designs').textContent = designs;
+    document.querySelector('.num-lines-of-code').textContent = linesOfCode;
+  }
+</script>
+
+<style>
+  body {
+    font-family: 'Oxygen', sans-serif;
+    color: white;
+    background: hsla(57, 100%, 84%, 1);
+    background: linear-gradient(90deg, hsla(57, 100%, 84%, 1) 0%, hsla(280, 84%, 55%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(57, 100%, 84%, 1) 0%, hsla(280, 84%, 55%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(57, 100%, 84%, 1) 0%, hsla(280, 84%, 55%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#FFFBAF", endColorstr="#AB2AED", GradientType=1);
+  }
+
+  button {
+    border: solid 1px white;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(14, 212, 219, 0.2);
+    padding: 8px;
+    color: white;
+    display: block;
+    margin: auto;
+  }
+
+  .container {
+    display: flex;
+  }
+
+  .value-container {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .counter {
+    margin-bottom: 8px;
+  }
+</style>
+
+<div class="container">
+  <div class="value-container">
+    <div class="counter">Features: <span class="counter-value num-product-ideas"></span></div>
+    <button class="idea" onclick="addProduct()">Feature</button>
+  </div>
+  <div class="value-container">
+    <div class="counter">Designs: <span class="counter-value num-designs"></span></div>
+    <button class="design" onclick="addDesign()">Design</button>
+  </div>
+  <div class="value-container">
+    <div class="counter">Lines of Code: <span class="counter-value num-lines-of-code"></span></div>
+    <button class="code" onclick="addCode()">Code</button>
+  </div>
+</div>
+
+<script>
+  updateView();
+</script>
