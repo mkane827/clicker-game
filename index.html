@@ -4,8 +4,8 @@
 
 <script>
   const TICK_SPEED = 1500;
-  const DESIGNS_PER_FEATURE = 1; // 3;
-  const LINES_OF_CODE_PER_DESIGN = 1; // 120;
+  const DESIGNS_PER_FEATURE = 3;
+  const LINES_OF_CODE_PER_DESIGN = 120;
   const SELECTOR = {
     NUM_PRODUCT_IDEAS: '.num-product-ideas',
     NUM_DESIGNS: '.num-designs',
@@ -19,6 +19,9 @@
   let designs = 0;
   let linesOfCode = 0;
   let money = 0;
+  let pm = 0;
+  let ux = 0;
+  let eng = 0;
   let designTimeout;
 
   function getEl(selector) {
@@ -38,18 +41,18 @@
   }
 
   function addProduct() {
-    products++;
+    products += 1 + pm;
     setNumText(SELECTOR.NUM_PRODUCT_IDEAS, products);
     setElDisabled(SELECTOR.PRODUCT_BUTTON, true);
     setElDisabled(SELECTOR.DESIGN_BUTTON, !!designTimeout)
     setTimeout(() => {
       setElDisabled(SELECTOR.PRODUCT_BUTTON, false);
-    }, 1000 * products);
+    }, TICK_SPEED * products);
   }
 
   function addDesign() {
     if (designs < products * DESIGNS_PER_FEATURE) {
-      designs++;
+      designs += 1 + ux;
       setNumText(SELECTOR.NUM_DESIGNS, designs);
       setElDisabled(SELECTOR.DESIGN_BUTTON, true);
       setElDisabled(SELECTOR.CODE_BUTTON, false);
@@ -57,7 +60,7 @@
         designTimeout = setTimeout(() => {
           setElDisabled(SELECTOR.DESIGN_BUTTON, false);
           designTimeout = false;
-        }, 300 * designs);
+        }, TICK_SPEED * designs / 3);
       }
     } else {
       setElDisabled(SELECTOR.DESIGN_BUTTON, true);
@@ -66,7 +69,7 @@
 
   function addCode() {
     if (linesOfCode < designs * LINES_OF_CODE_PER_DESIGN) {
-      linesOfCode++;
+      linesOfCode += 1 + eng;
       setNumText(SELECTOR.NUM_LINES_OF_CODE, linesOfCode);
     } else {
       setElDisabled(SELECTOR.CODE_BUTTON, true);
