@@ -1,43 +1,128 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
 
 <script>
+  const TICK_SPEED = 1500;
+  const DESIGNS_PER_FEATURE = 1; // 3;
+  const LINES_OF_CODE_PER_DESIGN = 1; // 120;
+  const SELECTOR = {
+    NUM_PRODUCT_IDEAS: '.num-product-ideas',
+    NUM_DESIGNS: '.num-designs',
+    NUM_LINES_OF_CODE: '.num-lines-of-code',
+    MONEY_VALUE: '.money-value span',
+    PRODUCT_BUTTON: 'button.idea',
+    DESIGN_BUTTON: 'button.design',
+    CODE_BUTTON: 'button.code'
+  };
   let products = 0;
   let designs = 0;
   let linesOfCode = 0;
+  let money = 0;
+  let designTimeout;
+
+  function getEl(selector) {
+    return document.querySelector(selector);
+  }
+
+  function setText(selector, textContent) {
+    return getEl(selector).textContent = textContent
+  }
+
+  function setNumText(selector, num) {
+    return setText(selector, num.toLocaleString());
+  }
+
+  function setElDisabled(selector, isDisabled) {
+    getEl(selector).disabled = isDisabled;
+  }
 
   function addProduct() {
     products++;
-    updateView();
+    setNumText(SELECTOR.NUM_PRODUCT_IDEAS, products);
+    setElDisabled(SELECTOR.PRODUCT_BUTTON, true);
+    setElDisabled(SELECTOR.DESIGN_BUTTON, !!designTimeout)
+    setTimeout(() => {
+      setElDisabled(SELECTOR.PRODUCT_BUTTON, false);
+    }, 1000 * products);
   }
 
   function addDesign() {
-    designs++;
-    updateView();
+    if (designs < products * DESIGNS_PER_FEATURE) {
+      designs++;
+      setNumText(SELECTOR.NUM_DESIGNS, designs);
+      setElDisabled(SELECTOR.DESIGN_BUTTON, true);
+      setElDisabled(SELECTOR.CODE_BUTTON, false);
+      if (designs < products * DESIGNS_PER_FEATURE) {
+        designTimeout = setTimeout(() => {
+          setElDisabled(SELECTOR.DESIGN_BUTTON, false);
+          designTimeout = false;
+        }, 300 * designs);
+      }
+    } else {
+      setElDisabled(SELECTOR.DESIGN_BUTTON, true);
+    }
   }
 
   function addCode() {
-    linesOfCode++;
-    updateView();
+    if (linesOfCode < designs * LINES_OF_CODE_PER_DESIGN) {
+      linesOfCode++;
+      setNumText(SELECTOR.NUM_LINES_OF_CODE, linesOfCode);
+    } else {
+      setElDisabled(SELECTOR.CODE_BUTTON, true);
+    }
   }
 
-  function updateView() {
-    document.querySelector('.num-product-ideas').textContent = products;
-    document.querySelector('.num-designs').textContent = designs;
-    document.querySelector('.num-lines-of-code').textContent = linesOfCode;
-  }
+  setInterval(() => {
+    money += linesOfCode;
+    setNumText(SELECTOR.MONEY_VALUE, money);
+  }, TICK_SPEED);
 </script>
 
 <style>
+  * {
+    font-family: 'Inconsolata', sans-serif !important;
+  }
+
   body {
-    font-family: 'Oxygen', sans-serif;
+    font-size: 24px;
     color: white;
+    padding: 8px;
     background: hsla(57, 100%, 84%, 1);
     background: linear-gradient(90deg, hsla(57, 100%, 84%, 1) 0%, hsla(280, 84%, 55%, 1) 100%);
     background: -moz-linear-gradient(90deg, hsla(57, 100%, 84%, 1) 0%, hsla(280, 84%, 55%, 1) 100%);
     background: -webkit-linear-gradient(90deg, hsla(57, 100%, 84%, 1) 0%, hsla(280, 84%, 55%, 1) 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#FFFBAF", endColorstr="#AB2AED", GradientType=1);
+  }
+
+  section {
+    margin-bottom: 16px;
+  }
+
+  header {
+    display: flex;
+  }
+
+  .activity-tracker {
+    box-sizing: border-box;
+    flex: 1 0 50%;
+    border: solid 1px white;
+    padding: 8px;
+    margin-left: 16px;
+  }
+
+  header h1 {
+    margin: 0 0 8px;
+  }
+
+  header h5 {
+    margin: 0;
+  }
+
+  .section-header {
+    text-decoration: underline;
+    font-size: 30px;
+    margin-bottom: 16px;
   }
 
   button {
@@ -46,9 +131,20 @@
     outline: none;
     background: rgba(14, 212, 219, 0.2);
     padding: 8px;
+    min-width: 150px;
     color: white;
     display: block;
     margin: auto;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  button:disabled .can-add {
+    color: transparent;
   }
 
   .container {
@@ -63,23 +159,58 @@
   .counter {
     margin-bottom: 8px;
   }
+
+  .money-value {
+    font-size: 96px;
+    margin-bottom: 24px;
+  }
 </style>
 
-<div class="container">
-  <div class="value-container">
-    <div class="counter">Features: <span class="counter-value num-product-ideas"></span></div>
-    <button class="idea" onclick="addProduct()">Feature</button>
+<header>
+  <div>
+    <h1>Startup Clicker</h1>
+    <h5>Experience the Silicon Valley startup rollercoaster from your couch</h5>
+    <div class="money-value">$<span>0</span></div>
   </div>
-  <div class="value-container">
-    <div class="counter">Designs: <span class="counter-value num-designs"></span></div>
-    <button class="design" onclick="addDesign()">Design</button>
-  </div>
-  <div class="value-container">
-    <div class="counter">Lines of Code: <span class="counter-value num-lines-of-code"></span></div>
-    <button class="code" onclick="addCode()">Code</button>
-  </div>
-</div>
 
-<script>
-  updateView();
-</script>
+  <div class="activity-tracker">
+    ACTIVITY TRACKER
+  </div>
+
+</header>
+
+<section>
+  <div class="section-header">Bizness.io</div>
+
+  <div class="container">
+    <div class="value-container">
+      <div class="counter">Features: <span class="counter-value num-product-ideas">0</span></div>
+      <button class="idea" onclick="addProduct()">
+        <span class="can-add">+</span>
+        Feature
+      </button>
+    </div>
+    <div class="value-container">
+      <div class="counter">Designs: <span class="counter-value num-designs">0</span></div>
+      <button disabled="true" class="design" onclick="addDesign()">
+        <span class="can-add">+</span>
+        Design
+      </button>
+    </div>
+    <div class="value-container">
+      <div class="counter">Lines of Code: <span class="counter-value num-lines-of-code">0</span></div>
+      <button disabled="true" class="code" onclick="addCode()">
+        <span class="can-add">+</span>
+        Code
+      </button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">Employees</div>
+</section>
+
+<section>
+  <div class="section-header">Scrum Board</div>
+</section>
