@@ -6,12 +6,19 @@ body {
   font-size: 24px;
   color: white;
   padding: 8px;
-  background: hsla(57, 100%, 84%, 1);
+  background: #7f7fd5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #91eae4,
+    #86a8e7,
+    #7f7fd5
+  ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    90deg,
-    hsla(57, 100%, 84%, 1) 0%,
-    hsla(280, 84%, 55%, 1) 100%
-  );
+    to top,
+    #91eae4,
+    #86a8e7,
+    #7f7fd5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 section {
@@ -48,7 +55,6 @@ button {
   border: solid 1px white;
   border-radius: 8px;
   outline: none;
-  background: rgba(14, 212, 219, 0.2);
   padding: 8px;
   min-width: 150px;
   color: white;
@@ -56,6 +62,20 @@ button {
   margin: auto;
   font-size: 24px;
   cursor: pointer;
+  transition: 0.5s;
+  background-size: 200% auto;
+  background-image: linear-gradient(
+    to right,
+    #606c88 0%,
+    #3f4c6b 51%,
+    #606c88 100%
+  );
+
+  &:hover:not(:disabled) {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
 
   &:disabled {
     cursor: not-allowed;

@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp watch",
+    "start": "gulp default watch",
     "build": "gulp"
   },
   "repository": {
