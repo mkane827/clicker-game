@@ -4,14 +4,16 @@ const babel = require("gulp-babel");
 const watch = require("gulp-watch");
 const sass = require("gulp-sass")(require("sass"));
 const autoprefixer = require("gulp-autoprefixer");
+const concat = require("gulp-concat");
 
 function js() {
-  return src("./src/index.js")
+  return src("./src/**.js")
     .pipe(
       babel({
         presets: ["@babel/env", "minify"],
       })
     )
+    .pipe(concat("index.js"))
     .pipe(dest("./out"));
 }
 
