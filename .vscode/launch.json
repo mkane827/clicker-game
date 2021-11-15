@@ -7,8 +7,8 @@
     {
       "type": "pwa-chrome",
       "request": "launch",
-      "name": "Open index.html",
-      "file": "/Users/malcolm/Coding/clicker-game/index.html",
+      "name": "Clicker Game",
+      "file": "/Users/malcolm/Coding/clicker-game/out/index.html",
     }
   ]
 }

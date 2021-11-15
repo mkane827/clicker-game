@@ -1,0 +1,85 @@
+* {
+  font-family: "Inconsolata", sans-serif !important;
+}
+
+body {
+  font-size: 24px;
+  color: white;
+  padding: 8px;
+  background: hsla(57, 100%, 84%, 1);
+  background: linear-gradient(
+    90deg,
+    hsla(57, 100%, 84%, 1) 0%,
+    hsla(280, 84%, 55%, 1) 100%
+  );
+}
+
+section {
+  margin-bottom: 16px;
+}
+
+header {
+  display: flex;
+
+  h1 {
+    margin: 0 0 8px;
+  }
+
+  h5 {
+    margin: 0;
+  }
+}
+
+.activity-tracker {
+  box-sizing: border-box;
+  flex: 1 0 50%;
+  border: solid 1px white;
+  padding: 8px;
+  margin-left: 16px;
+}
+
+.section-header {
+  text-decoration: underline;
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+button {
+  border: solid 1px white;
+  border-radius: 8px;
+  outline: none;
+  background: rgba(14, 212, 219, 0.2);
+  padding: 8px;
+  min-width: 150px;
+  color: white;
+  display: block;
+  margin: auto;
+  font-size: 24px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+
+    .can-add {
+      color: transparent;
+    }
+  }
+}
+
+button button:disabled .container {
+  display: flex;
+}
+
+.value-container {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.counter {
+  margin-bottom: 8px;
+}
+
+.money-value {
+  font-size: 96px;
+  margin-bottom: 24px;
+}
