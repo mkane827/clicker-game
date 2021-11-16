@@ -8,42 +8,47 @@ let eng = 0;
 let designTimeout;
 
 function addProduct() {
-  products += 1 + pm;
-  setNumText(SELECTOR.NUM_PRODUCT_IDEAS, products);
-  setElDisabled(SELECTOR.PRODUCT_BUTTON, true);
-  setElDisabled(SELECTOR.DESIGN_BUTTON, !!designTimeout);
+  products += 1;
+  setNumText(EL.NUM_PRODUCT_IDEAS, products);
+  setElDisabled(EL.PRODUCT_BUTTON, true);
+  setElDisabled(EL.DESIGN_BUTTON, !!designTimeout);
   setTimeout(() => {
-    setElDisabled(SELECTOR.PRODUCT_BUTTON, false);
+    setElDisabled(EL.PRODUCT_BUTTON, false);
   }, TICK_SPEED * products);
 }
 
 function addDesign() {
   if (designs < products * DESIGNS_PER_FEATURE) {
-    designs += 1 + ux;
-    setNumText(SELECTOR.NUM_DESIGNS, designs);
-    setElDisabled(SELECTOR.DESIGN_BUTTON, true);
-    setElDisabled(SELECTOR.CODE_BUTTON, false);
+    designs += 1;
+    setNumText(EL.NUM_DESIGNS, designs);
+    setElDisabled(EL.DESIGN_BUTTON, true);
+    setElDisabled(EL.CODE_BUTTON, false);
     if (designs < products * DESIGNS_PER_FEATURE) {
       designTimeout = setTimeout(() => {
-        setElDisabled(SELECTOR.DESIGN_BUTTON, false);
+        setElDisabled(EL.DESIGN_BUTTON, false);
         designTimeout = false;
       }, (TICK_SPEED * designs) / 3);
     }
   } else {
-    setElDisabled(SELECTOR.DESIGN_BUTTON, true);
+    setElDisabled(EL.DESIGN_BUTTON, true);
   }
 }
 
-function addCode() {
+function addCode(newLines = 1) {
   if (linesOfCode < designs * LINES_OF_CODE_PER_DESIGN) {
-    linesOfCode += 1 + eng;
-    setNumText(SELECTOR.NUM_LINES_OF_CODE, linesOfCode);
+    linesOfCode += newLines;
+    setNumText(EL.NUM_LINES_OF_CODE, linesOfCode);
   } else {
-    setElDisabled(SELECTOR.CODE_BUTTON, true);
+    setElDisabled(EL.CODE_BUTTON, true);
   }
+}
+
+function addEngineer() {
+  eng++;
 }
 
 setInterval(() => {
   money += linesOfCode;
-  setNumText(SELECTOR.MONEY_VALUE, money);
+  setNumText(EL.MONEY_VALUE, money);
+  addCode(eng);
 }, TICK_SPEED);
