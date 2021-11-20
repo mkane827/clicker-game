@@ -1,7 +1,10 @@
-function nextEngCost() {
-  return 10000 * eng * eng + 10000;
+import { ENGINEER_BUTTON } from "./elements";
+import state from "./State";
+
+export function nextEngCost() {
+  return 10000 * state.eng * state.eng + 10000;
 }
 
-function checkEng() {
-  EL.ENGINEER_BUTTON.disabled = money < nextEngCost();
+export function checkEng() {
+  ENGINEER_BUTTON.disabled = state.money < nextEngCost();
 }
