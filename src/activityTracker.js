@@ -1,16 +1,20 @@
-const ACTIVITIES = {
+import { TICK_SPEED } from "./constants";
+import state from "./State";
+import { ACTIVITY_TRACKER, setText } from "./elements";
+
+export const ACTIVITIES = {
   FIRST_PRODUCT: "Hello, Silicon Valley",
   FIRST_DESIGN: "Ooo that's pretty, you should build it!",
 };
 
-function addActivity(activity) {
+export function addActivity(activity) {
   const newEl = document.createElement("li");
   setText(newEl, activity);
-  EL.ACTIVITY_TRACKER.append(newEl);
-  EL.ACTIVITY_TRACKER.scrollTop = EL.ACTIVITY_TRACKER.scrollHeight;
+  ACTIVITY_TRACKER.append(newEl);
+  ACTIVITY_TRACKER.scrollTop = ACTIVITY_TRACKER.scrollHeight;
 }
 
-function oneTimeActivity(conditionFn, activity) {
+export function oneTimeActivity(conditionFn, activity) {
   const interval = setInterval(() => {
     if (conditionFn()) {
       addActivity(activity);
@@ -19,8 +23,8 @@ function oneTimeActivity(conditionFn, activity) {
   }, TICK_SPEED);
 }
 
-function linesOfCodeActivity(numLines, activity) {
-  oneTimeActivity(() => linesOfCode >= numLines, activity);
+export function linesOfCodeActivity(numLines, activity) {
+  oneTimeActivity(() => state.linesOfCode >= numLines, activity);
 }
 
 linesOfCodeActivity(10, "No one knows about your startup idea, just you");
@@ -39,6 +43,6 @@ linesOfCodeActivity(
   "Your scrum board is overflowing with tasks, time to get some cofounders"
 );
 oneTimeActivity(
-  () => linesOfCode > 400 && money >= 5000,
+  () => state.linesOfCode > 400 && state.money >= 5000,
   "It's time to make your first hire, pick wisely"
 );
