@@ -1,11 +1,6 @@
-import { TICK_SPEED } from "./constants";
 import state from "./State";
 import { ACTIVITY_TRACKER, setText } from "./elements";
-
-export const ACTIVITIES = {
-  FIRST_PRODUCT: "Hello, Silicon Valley",
-  FIRST_DESIGN: "Ooo that's pretty, you should build it!",
-};
+import { COFOUNDERS_AVAILABLE_LINES_OF_CODE } from "./constants";
 
 export function addActivity(activity) {
   const newEl = document.createElement("li");
@@ -14,10 +9,11 @@ export function addActivity(activity) {
   ACTIVITY_TRACKER.scrollTop = ACTIVITY_TRACKER.scrollHeight;
 }
 
-export function oneTimeActivity(conditionFn, activity) {
+export function oneTimeActivity(conditionFn, activity, onPost = () => {}) {
   const interval = setInterval(() => {
     if (conditionFn()) {
       addActivity(activity);
+      onPost();
       clearInterval(interval);
     }
   }, 1);
@@ -44,7 +40,7 @@ linesOfCodeActivity(
   "A few people are talking your idea is getting some traction"
 );
 linesOfCodeActivity(
-  70,
+  COFOUNDERS_AVAILABLE_LINES_OF_CODE,
   "Your scrum board is overflowing with tasks, time to get some cofounders"
 );
 linesOfCodeActivity(80, "Apply to the top incubators");
@@ -62,7 +58,8 @@ linesOfCodeActivity(
 );
 linesOfCodeActivity(
   195,
-  "You’re having trouble finding product market fit lines of code now generate 50% less revenue"
+  "You’re having trouble finding product market fit lines of code now generate 50% less revenue",
+  () => (state.revenueMultiplier -= 0.5)
 );
 oneTimeActivity(
   () => state.linesOfCode > 125 && state.money >= 5000,

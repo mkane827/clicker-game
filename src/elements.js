@@ -11,12 +11,13 @@ export const ENGINEER_BUTTON = getEl("button.engineer");
 export const NEXT_ENG_COST = getEl(".next-eng-cost");
 export const ACTIVITY_TRACKER = getEl(".activity-tracker");
 
-function getEl(selector) {
+export function getEl(selector) {
   return document.querySelector(selector);
 }
 
 export function setText(el, textContent) {
-  return (el.textContent = textContent);
+  el.textContent = textContent;
+  return el;
 }
 
 export function setNumText(el, num) {
@@ -25,12 +26,15 @@ export function setNumText(el, num) {
 
 export function setElDisabled(el, isDisabled) {
   el.disabled = isDisabled;
+  return el;
 }
 
 export function showEl(el) {
   el.classList.remove("hidden");
+  return el;
 }
 
 export function hideEl(el) {
   el.classList.add("hidden");
+  return el;
 }

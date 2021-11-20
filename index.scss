@@ -127,7 +127,7 @@ button {
   }
 }
 
-.task-list {
+.scrum-board {
   list-style: none;
 
   li {
@@ -139,6 +139,7 @@ button {
       border: none;
       width: 100%;
       color: black;
+      text-align: left;
 
       &:hover {
         color: black;
@@ -147,6 +148,25 @@ button {
       &:disabled {
         background: lightgrey;
         color: grey;
+      }
+
+      .name {
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+
+      .cost {
+        padding-right: 16px;
+        margin-right: 16px;
+        border-right: solid 1px black;
+
+        &:not(.equity):before {
+          content: "$";
+        }
+
+        &.equity:after {
+          content: "% Equity";
+        }
       }
     }
   }
