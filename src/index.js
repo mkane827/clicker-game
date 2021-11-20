@@ -15,6 +15,10 @@ function addProduct() {
   setTimeout(() => {
     setElDisabled(EL.PRODUCT_BUTTON, false);
   }, TICK_SPEED * products);
+
+  if (products === 1) {
+    addActivity(ACTIVITIES.FIRST_PRODUCT);
+  }
 }
 
 function addDesign() {
@@ -32,23 +36,35 @@ function addDesign() {
   } else {
     setElDisabled(EL.DESIGN_BUTTON, true);
   }
+
+  if (designs === 1) {
+    addActivity(ACTIVITIES.FIRST_DESIGN);
+  }
 }
 
 function addCode(newLines = 1) {
-  if (linesOfCode < designs * LINES_OF_CODE_PER_DESIGN) {
-    linesOfCode += newLines;
-    setNumText(EL.NUM_LINES_OF_CODE, linesOfCode);
-  } else {
+  const maxLines = designs * LINES_OF_CODE_PER_DESIGN;
+  const newLinesOfCode = linesOfCode + newLines;
+  // babel minify not working with Math.min... annoying
+  linesOfCode = newLinesOfCode < maxLines ? newLinesOfCode : maxLines;
+  setNumText(EL.NUM_LINES_OF_CODE, linesOfCode);
+
+  if (linesOfCode === maxLines) {
     setElDisabled(EL.CODE_BUTTON, true);
   }
 }
 
 function addEngineer() {
-  eng++;
+  money -= nextEngCost();
+  setNumText(EL.NUM_ENG, ++eng);
+  setNumText(EL.NEXT_ENG_COST, nextEngCost());
+  showEl(EL.ENG_COUNTER);
+  checkEng();
 }
 
 setInterval(() => {
   money += linesOfCode;
   setNumText(EL.MONEY_VALUE, money);
   addCode(eng);
+  checkEng();
 }, TICK_SPEED);
