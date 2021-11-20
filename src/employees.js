@@ -1,5 +1,5 @@
 function nextEngCost() {
-  return 10 * eng * eng + 10000;
+  return 10000 * eng * eng + 10000;
 }
 
 function checkEng() {
