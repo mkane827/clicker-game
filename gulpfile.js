@@ -1,5 +1,4 @@
 const { series, src, dest } = require("gulp");
-const inlinesource = require("gulp-inline-source");
 const babel = require("gulp-babel");
 const watch = require("gulp-watch");
 const sass = require("gulp-sass")(require("sass"));
@@ -25,7 +24,7 @@ function scss() {
 }
 
 function html() {
-  return src("./src/index.html").pipe(inlinesource()).pipe(dest("./out"));
+  return src("./src/index.html").pipe(dest("./out"));
 }
 
 const build = series(js, scss, html);
