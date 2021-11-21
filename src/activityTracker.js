@@ -29,35 +29,35 @@ export function linesOfCodeActivity(numLines, activity) {
 
 linesOfCodeActivity(10, "No one knows about your startup idea, just you");
 linesOfCodeActivity(15, "A few close friends say they like your idea you can't tell if they mean it or if they are just being nice");
-linesOfCodeActivity(20, "Your parents do not understand your idea");
+linesOfCodeActivity(30, "Your parents do not understand your idea");
 linesOfCodeActivity(
-  45,
+  40,
   "Coding all night pays off, your MVP is ready to share!"
 );
 linesOfCodeActivity(45, "Give your first demo");
-linesOfCodeActivity(46, "Your demo didn't go as planned");
+linesOfCodeActivity(50, "Your demo didn't go as planned");
 linesOfCodeActivity(
-  51,
+  60,
   "A few people are talking your idea is getting some traction"
 );
 linesOfCodeActivity(
-  60,
+  70,
   "Your scrum board is overflowing with tasks, time to get some cofounders"
 );
-linesOfCodeActivity(75, "Apply to the top incubators");
-linesOfCodeActivity(95, "Get rejected from the top incubators");
-linesOfCodeActivity(101, "Perfect your demo and pitch");
-linesOfCodeActivity(115, "Lucky break a spot opened in your second choice incubator ");
+linesOfCodeActivity(80, "Apply to the top incubators");
+linesOfCodeActivity(105, "Get rejected from the top incubators");
+linesOfCodeActivity(110, "Perfect your demo and pitch");
+linesOfCodeActivity(130, "Lucky break a spot opened in your second choice incubator ");
 oneTimeActivity(
   () => state.linesOfCode > 125 && state.money >= 5000,
   "It's time to make your first hire, pick wisely"
 );
-linesOfCodeActivity(135, "Search for product market fit");
-linesOfCodeActivity(155, "Congradulations you have your first customer");
-linesOfCodeActivity(168, "Look for more customers to confirm product market fit");
-linesOfCodeActivity(185, "You’re having trouble finding product market fit lines of code now generate 50% less revenue");
+linesOfCodeActivity(145, "Search for product market fit");
+linesOfCodeActivity(165, "Congradulations you have your first customer");
+linesOfCodeActivity(178, "Look for more customers to confirm product market fit");
+linesOfCodeActivity(195, "You’re having trouble finding product market fit lines of code now generate 50% less revenue");
 oneTimeActivity(
-  () => state.linesOfCode > 210 && state.money >= 10000,
+  () => state.linesOfCode > 220 && state.money >= 10000,
   "You need customers go hire a head of sales"
 );
 
