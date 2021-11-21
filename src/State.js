@@ -8,6 +8,8 @@ class State {
     this.ux = 0;
     this.eng = 0;
     this.designTimeout;
+    this.tickMultiplier_ = 1;
+    this.revenueMultiplier = 1;
   }
 
   set linesOfCode(numLines) {
@@ -16,6 +18,17 @@ class State {
 
   get linesOfCode() {
     return this.linesOfCode_;
+  }
+
+  lowerTickMultiplier(diff) {
+    this.tickMultiplier_ = Math.min(
+      1,
+      Math.max(0, this.tickMultiplier_ - diff)
+    );
+  }
+
+  get tickspeed() {
+    return 1500 * this.tickMultiplier_;
   }
 
   addLinesOfCode(numLines = 1) {

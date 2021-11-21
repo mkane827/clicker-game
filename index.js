@@ -1,8 +1,4 @@
-import {
-  TICK_SPEED,
-  DESIGNS_PER_FEATURE,
-  LINES_OF_CODE_PER_DESIGN,
-} from "./src/constants";
+import { DESIGNS_PER_FEATURE, LINES_OF_CODE_PER_DESIGN } from "./src/constants";
 import { setElDisabled, setNumText } from "./src/elements";
 import {
   NUM_PRODUCT_IDEAS,
@@ -18,7 +14,8 @@ import {
 } from "./src/elements";
 import { checkEng, nextEngCost } from "./src/employees";
 import state from "./src/State";
-import { ACTIVITIES, addActivity } from "./src/activityTracker";
+import { addActivity } from "./src/activityTracker";
+import "./src/scrumBoard";
 
 window.addProduct = function () {
   state.products += 1;
@@ -27,10 +24,10 @@ window.addProduct = function () {
   setElDisabled(DESIGN_BUTTON, !!state.designTimeout);
   setTimeout(() => {
     setElDisabled(PRODUCT_BUTTON, false);
-  }, TICK_SPEED * state.products);
+  }, state.tickspeed * state.products);
 
   if (state.products === 1) {
-    addActivity(ACTIVITIES.FIRST_PRODUCT);
+    addActivity("Hello, Silicon Valley");
   }
 };
 
@@ -44,14 +41,14 @@ window.addDesign = function () {
       state.designTimeout = setTimeout(() => {
         setElDisabled(DESIGN_BUTTON, false);
         state.designTimeout = false;
-      }, (TICK_SPEED * state.designs) / 3);
+      }, (state.tickspeed * state.designs) / 3);
     }
   } else {
     setElDisabled(DESIGN_BUTTON, true);
   }
 
   if (state.designs === 1) {
-    addActivity(ACTIVITIES.FIRST_DESIGN);
+    addActivity("Ooo that's pretty, you should build it!");
   }
 };
 
@@ -74,9 +71,11 @@ window.addEngineer = function () {
   checkEng();
 };
 
-setInterval(() => {
-  state.money += state.linesOfCode;
+function tick() {
+  state.money += state.linesOfCode * state.revenueMultiplier;
   setNumText(MONEY_VALUE, state.money);
   addCode(state.eng);
   checkEng();
-}, TICK_SPEED);
+  setTimeout(tick, state.tickspeed);
+}
+tick();
