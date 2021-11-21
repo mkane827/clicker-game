@@ -2,6 +2,9 @@ import state from "./State";
 import { ACTIVITY_TRACKER, setText } from "./elements";
 import { COFOUNDERS_AVAILABLE_LINES_OF_CODE } from "./constants";
 
+/**
+ * @param {string} activity
+ */
 export function addActivity(activity) {
   const newEl = document.createElement("li");
   setText(newEl, activity);

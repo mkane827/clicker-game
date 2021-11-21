@@ -10,6 +10,7 @@ class State {
     this.designTimeout;
     this.tickMultiplier_ = 1;
     this.revenueMultiplier = 1;
+    this.maxEmployees_ = 10;
   }
 
   set linesOfCode(numLines) {
@@ -29,6 +30,14 @@ class State {
 
   get tickspeed() {
     return 1500 * this.tickMultiplier_;
+  }
+
+  get numEmployees() {
+    return this.eng + this.ux + this.pm;
+  }
+
+  get canAddMoreEmployees() {
+    return this.numEmployees < this.maxEmployees_;
   }
 
   addLinesOfCode(numLines = 1) {

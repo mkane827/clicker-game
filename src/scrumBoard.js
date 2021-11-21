@@ -4,6 +4,18 @@ import state from "./State";
 
 const BOARD = getEl(".scrum-board");
 
+/**
+ *
+ * @param p {{
+ *  name: string,
+ *  cost: number,
+ *  description: string,
+ *  action: () => {},
+ *  isEquity: boolean,
+ *  isDisabled: () => {},
+ *  shouldAppear: () => {},
+ * }}
+ */
 function addToBoard({
   name,
   cost,
@@ -65,10 +77,11 @@ addToBoard({
   shouldAppear: () => state.linesOfCode >= COFOUNDERS_AVAILABLE_LINES_OF_CODE,
 });
 
-// addToBoard({
-//   name: "RANK HIGH ON PRODUCT HUNT",
-//   cost: 0,
-//   description: "Gain 1,500 visits to your company site and  236 new users",
-//   action: () => {},
-//   // isDisabled: () => {},
-// });
+addToBoard({
+  name: "LEASE OFFICE SPACE",
+  cost: 25000,
+  description: "Find your first office space",
+  action: () => {},
+  isDisabled: () => state.money < 25000,
+  shouldAppear: () => !state.canAddMoreEmployees,
+});

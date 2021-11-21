@@ -4,10 +4,6 @@ export const NUM_LINES_OF_CODE = getEl(".num-lines-of-code");
 export const NUM_ENG = getEl(".num-eng");
 export const ENG_COUNTER = getEl(".eng-counter");
 export const MONEY_VALUE = getEl(".money-value span");
-export const PRODUCT_BUTTON = getEl("button.idea");
-export const DESIGN_BUTTON = getEl("button.design");
-export const CODE_BUTTON = getEl("button.code");
-export const ENGINEER_BUTTON = getEl("button.engineer");
 export const NEXT_ENG_COST = getEl(".next-eng-cost");
 export const ACTIVITY_TRACKER = getEl(".activity-tracker");
 
