@@ -54,10 +54,6 @@ linesOfCodeActivity(
   130,
   "Lucky break a spot opened in your second choice incubator "
 );
-oneTimeActivity(
-  () => state.linesOfCode > 125 && state.money >= 5000,
-  "It's time to make your first hire, pick wisely"
-);
 linesOfCodeActivity(145, "Search for product market fit");
 linesOfCodeActivity(165, "Congradulations you have your first customer");
 linesOfCodeActivity(
@@ -67,6 +63,10 @@ linesOfCodeActivity(
 linesOfCodeActivity(
   195,
   "You’re having trouble finding product market fit lines of code now generate 50% less revenue"
+);
+oneTimeActivity(
+  () => state.linesOfCode > 125 && state.money >= 5000,
+  "It's time to make your first hire, pick wisely"
 );
 oneTimeActivity(
   () => state.linesOfCode > 220 && state.money >= 10000,
