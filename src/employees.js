@@ -1,4 +1,4 @@
-import { CUSTOMERS_VALUE, getEl, setNumText, setText } from "./elements";
+import { getEl, setText } from "./elements";
 import state from "./State";
 
 export const ENGINEER_BUTTON = getEl("button.engineer");
@@ -18,7 +18,7 @@ export function exposeHeadOfSales() {
     1
   );
   button.onclick = () => {
-    setNumText(CUSTOMERS_VALUE, state.addCustomers(10));
+    state.addCustomers(10);
     li.remove();
     clearInterval(disabledChecker);
   };

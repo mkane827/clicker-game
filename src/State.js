@@ -1,3 +1,5 @@
+import { syncCustomerValue, syncMoneyValue } from "./elements";
+
 class State {
   constructor() {
     this.products = 0;
@@ -49,14 +51,28 @@ class State {
     return this.money_;
   }
 
-  spendMoney(amount = 0) {
+  loseMoney(amount = 0) {
     this.money_ -= amount;
+    syncMoneyValue();
     return this.money;
+  }
+
+  spendMoney(...args) {
+    return this.loseMoney(args);
   }
 
   makeMoney(amount = 0) {
     this.money_ += amount;
+    syncMoneyValue();
     return this.money;
+  }
+
+  raiseRevenueMultiplier(amount = 0) {
+    this.revenueMultiplier_ += amount;
+  }
+
+  lowerRevenueMultiplier(amount = 0) {
+    this.revenueMultiplier_ -= amount;
   }
 
   makeMoneyFromCode() {
@@ -82,6 +98,13 @@ class State {
 
   addCustomers(newCustomers = 0) {
     this.customers_ += newCustomers;
+    syncCustomerValue();
+    return this.customers;
+  }
+
+  loseCustomers(newCustomers = 0) {
+    this.customers_ -= newCustomers;
+    syncCustomerValue();
     return this.customers;
   }
 

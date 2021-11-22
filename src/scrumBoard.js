@@ -1,4 +1,3 @@
-import { COFOUNDERS_AVAILABLE_LINES_OF_CODE } from "./constants";
 import { getEl, setText, setNumText } from "./elements";
 import state from "./State";
 
@@ -15,14 +14,13 @@ const BOARD = getEl(".scrum-board");
  *  shouldAppear: () => {},
  * }}
  */
-function addToBoard({
+export function addToBoard({
   name,
   cost,
   description,
   action = () => {},
-  isEquity,
   isDisabled = () => true,
-  shouldAppear = () => false,
+  shouldAppear = () => true,
 }) {
   const li = document.createElement("li");
   const button = document.createElement("button");
@@ -60,17 +58,6 @@ function addToBoard({
     }
   }, 1);
 }
-
-addToBoard({
-  name: "GET TWO COFOUNDERS",
-  cost: "66% equity",
-  description:
-    "Get work done faster and split equity equally between all three cofounders",
-  action: () => state.lowerTickMultiplier(0.3),
-  isEquity: true,
-  isDisabled: () => state.money < 100,
-  shouldAppear: () => state.linesOfCode >= COFOUNDERS_AVAILABLE_LINES_OF_CODE,
-});
 
 addToBoard({
   name: "LEASE OFFICE SPACE",

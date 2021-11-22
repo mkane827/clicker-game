@@ -1,12 +1,7 @@
-export const NUM_PRODUCT_IDEAS = getEl(".num-product-ideas");
-export const NUM_DESIGNS = getEl(".num-designs");
-export const NUM_LINES_OF_CODE = getEl(".num-lines-of-code");
-export const NUM_ENG = getEl(".num-eng");
-export const ENG_COUNTER = getEl(".eng-counter");
-export const MONEY_VALUE = getEl(".money-value span");
-export const CUSTOMERS_VALUE = getEl(".customers-value span");
-export const NEXT_ENG_COST = getEl(".next-eng-cost");
-export const ACTIVITY_TRACKER = getEl(".activity-tracker");
+import state from "./State";
+
+const MONEY_VALUE = getEl(".money-value span");
+const CUSTOMERS_VALUE = getEl(".customers-value span");
 
 export function getEl(selector) {
   return document.querySelector(selector);
@@ -34,4 +29,12 @@ export function showEl(el) {
 export function hideEl(el) {
   el.classList.add("hidden");
   return el;
+}
+
+export function syncMoneyValue() {
+  setNumText(MONEY_VALUE, state.money);
+}
+
+export function syncCustomerValue() {
+  setNumText(CUSTOMERS_VALUE, state.customers);
 }

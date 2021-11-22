@@ -1,25 +1,20 @@
-import { DESIGNS_PER_FEATURE, LINES_OF_CODE_PER_DESIGN } from "./src/constants";
-import {
-  NUM_PRODUCT_IDEAS,
-  NUM_DESIGNS,
-  NUM_LINES_OF_CODE,
-  NUM_ENG,
-  NEXT_ENG_COST,
-  ENG_COUNTER,
-  MONEY_VALUE,
-  setElDisabled,
-  setNumText,
-  getEl,
-  showEl,
-} from "./src/elements";
+import { setElDisabled, setNumText, getEl, showEl } from "./src/elements";
 import { checkEng, ENGINEER_BUTTON } from "./src/employees";
 import state from "./src/State";
 import { addActivity } from "./src/activityTracker";
 import "./src/scrumBoard";
 
-export const PRODUCT_BUTTON = getEl("button.idea");
-export const DESIGN_BUTTON = getEl("button.design");
-export const CODE_BUTTON = getEl("button.code");
+const DESIGNS_PER_FEATURE = 3;
+const LINES_OF_CODE_PER_DESIGN = 120;
+const PRODUCT_BUTTON = getEl("button.idea");
+const DESIGN_BUTTON = getEl("button.design");
+const CODE_BUTTON = getEl("button.code");
+const NUM_PRODUCT_IDEAS = getEl(".num-product-ideas");
+const NUM_DESIGNS = getEl(".num-designs");
+const NUM_LINES_OF_CODE = getEl(".num-lines-of-code");
+const NUM_ENG = getEl(".num-eng");
+const ENG_COUNTER = getEl(".eng-counter");
+const NEXT_ENG_COST = getEl(".next-eng-cost");
 
 let warnedOfCodeDisabled = false;
 
@@ -42,6 +37,7 @@ DESIGN_BUTTON.onclick = function () {
   setNumText(NUM_DESIGNS, state.designs);
   setElDisabled(DESIGN_BUTTON, true);
   setElDisabled(CODE_BUTTON, false);
+  warnedOfCodeDisabled = false;
   if (state.designs < state.products * DESIGNS_PER_FEATURE) {
     state.designTimeout = setTimeout(() => {
       setElDisabled(DESIGN_BUTTON, false);
@@ -83,7 +79,6 @@ ENGINEER_BUTTON.onclick = function () {
 
 function tick() {
   state.makeMoneyFromCode();
-  setNumText(MONEY_VALUE, state.money);
   addCode(state.eng);
   checkEng();
   setTimeout(tick, state.tickspeed);
