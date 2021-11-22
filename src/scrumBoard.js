@@ -1,17 +1,26 @@
-import { COFOUNDERS_AVAILABLE_LINES_OF_CODE } from "./constants";
 import { getEl, setText, setNumText } from "./elements";
 import state from "./State";
 
 const BOARD = getEl(".scrum-board");
 
-function addToBoard({
+/**
+ *
+ * @param p {{
+ *  name: string,
+ *  cost: string,
+ *  description: string,
+ *  action: () => {},
+ *  isDisabled: () => {},
+ *  shouldAppear: () => {},
+ * }}
+ */
+export function addToBoard({
   name,
   cost,
   description,
   action = () => {},
-  isEquity,
   isDisabled = () => true,
-  shouldAppear = () => false,
+  shouldAppear = () => true,
 }) {
   const li = document.createElement("li");
   const button = document.createElement("button");
@@ -21,11 +30,7 @@ function addToBoard({
   setText(nameEl, name);
 
   const costEl = document.createElement("span");
-  costEl.classList.add("cost");
-  if (isEquity) {
-    costEl.classList.add("equity");
-  }
-  setNumText(costEl, cost);
+  setText(costEl, cost);
 
   const descriptionEl = document.createElement("span");
   descriptionEl.classList.add("description");
@@ -55,20 +60,13 @@ function addToBoard({
 }
 
 addToBoard({
-  name: "GET TWO COFOUNDERS",
-  cost: 66,
-  description:
-    "Get work done faster and split equity equally between all three cofounders",
-  action: () => state.lowerTickMultiplier(0.3),
-  isEquity: true,
-  isDisabled: () => state.money < 100,
-  shouldAppear: () => state.linesOfCode >= COFOUNDERS_AVAILABLE_LINES_OF_CODE,
+  name: "LEASE OFFICE SPACE",
+  cost: "$25,000",
+  description: "Find your first office space",
+  action: () => {
+    state.spendMoney(25000);
+    state.addMaxEmployees(10);
+  },
+  isDisabled: () => state.money < 25000,
+  shouldAppear: () => !state.canAddMoreEmployees,
 });
-
-// addToBoard({
-//   name: "RANK HIGH ON PRODUCT HUNT",
-//   cost: 0,
-//   description: "Gain 1,500 visits to your company site and  236 new users",
-//   action: () => {},
-//   // isDisabled: () => {},
-// });

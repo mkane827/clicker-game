@@ -52,6 +52,7 @@ header {
   padding: 8px;
   overflow: auto;
   height: 220px;
+  font-size: 20px;
 
   li {
     margin-bottom: 16px;
@@ -93,6 +94,7 @@ button {
 
   &:disabled {
     cursor: not-allowed;
+    opacity: 0.5;
 
     .can-add {
       color: transparent;
@@ -113,16 +115,17 @@ button {
   margin-bottom: 8px;
 }
 
-.money-value {
-  font-size: 96px;
+.money-value,
+.customer-value {
   margin-bottom: 24px;
 }
 
 .job-postings {
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
 
-  button {
+  li {
     margin: 0 16px 16px 0;
   }
 }
@@ -159,14 +162,6 @@ button {
         padding-right: 16px;
         margin-right: 16px;
         border-right: solid 1px black;
-
-        &:not(.equity):before {
-          content: "$";
-        }
-
-        &.equity:after {
-          content: "% Equity";
-        }
       }
     }
   }

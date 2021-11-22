@@ -16,6 +16,7 @@
       <h1>Startup Clicker!</h1>
       <h5>Experience the Silicon Valley startup rollercoaster from your couch</h5>
       <div class="money-value">$<span>0</span></div>
+      <div class="customers-value"><span>0</span> customers</div>
     </div>
 
     <ul class="activity-tracker">
@@ -29,14 +30,14 @@
     <div class="container">
       <div class="value-container">
         <div class="counter">Features: <span class="counter-value num-product-ideas">0</span></div>
-        <button class="idea" onclick="addProduct()">
+        <button class="idea">
           <span class="can-add">+</span>
           Feature
         </button>
       </div>
       <div class="value-container">
         <div class="counter">Designs: <span class="counter-value num-designs">0</span></div>
-        <button disabled="true" class="design" onclick="addDesign()">
+        <button disabled="true" class="design">
           <span class="can-add">+</span>
           Design
         </button>
@@ -44,7 +45,7 @@
       <div class="value-container">
         <div class="counter">Lines of Code: <span class="counter-value num-lines-of-code">0</span></div>
         <div class="counter eng-counter hidden">Engineers: <span class="counter-value num-eng">0</span></div>
-        <button disabled="true" class="code" onclick="addCode()">
+        <button disabled="true" class="code">
           <span class="can-add">+</span>
           Code
         </button>
@@ -54,17 +55,11 @@
 
   <section>
     <div class="section-header">Employees</div>
-    <div class="job-postings">
-      <!-- <button disabled>Co-founders</button> -->
-      <button class="engineer" onclick="addEngineer()" disabled>Engineer ($<span
-          class="next-eng-cost">10,000</span>)</button>
-      <!-- <button disabled>Product</button> -->
-      <!-- <button disabled>Design</button> -->
-      <!-- <button disabled>Marketing</button> -->
-      <!-- <button disabled>HR</button> -->
-      <!-- <button disabled>OPs</button> -->
-      <!-- <button disabled>QA</button> -->
-    </div>
+    <ul class="job-postings">
+      <li>
+        <button class="engineer" disabled>Engineer ($<span class="next-eng-cost">10,000</span>)</button>
+      </li>
+    </ul>
   </section>
 
   <section>

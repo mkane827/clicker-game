@@ -1,3 +1,0 @@
-export const DESIGNS_PER_FEATURE = 3;
-export const LINES_OF_CODE_PER_DESIGN = 120;
-export const COFOUNDERS_AVAILABLE_LINES_OF_CODE = 70;
