@@ -3,14 +3,15 @@ class State {
     this.products = 0;
     this.designs = 0;
     this.linesOfCode_ = 0;
-    this.money = 0;
+    this.money_ = 0;
     this.pm = 0;
     this.ux = 0;
-    this.eng = 0;
+    this.eng_ = 0;
     this.designTimeout;
     this.tickMultiplier_ = 1;
-    this.revenueMultiplier = 1;
-    this.maxEmployees_ = 10;
+    this.revenueMultiplier_ = 10;
+    this.maxEmployees_ = 5;
+    this.customers_ = 0;
   }
 
   set linesOfCode(numLines) {
@@ -42,6 +43,50 @@ class State {
 
   addLinesOfCode(numLines = 1) {
     this.linesOfCode_ += numLines;
+  }
+
+  get money() {
+    return this.money_;
+  }
+
+  spendMoney(amount = 0) {
+    this.money_ -= amount;
+    return this.money;
+  }
+
+  makeMoney(amount = 0) {
+    this.money_ += amount;
+    return this.money;
+  }
+
+  makeMoneyFromCode() {
+    return this.makeMoney(this.linesOfCode * this.revenueMultiplier_);
+  }
+
+  get nextEngCost() {
+    return 10000 * Math.pow(this.eng_, 2) + 10000;
+  }
+
+  get canAffordNextEng() {
+    return this.money >= this.nextEngCost;
+  }
+
+  hireEng(numToHire = 1) {
+    this.eng_ += numToHire;
+    return this.eng;
+  }
+
+  get eng() {
+    return this.eng_;
+  }
+
+  addCustomers(newCustomers = 0) {
+    this.customers_ += newCustomers;
+    return this.customers;
+  }
+
+  get customers() {
+    return this.customers_;
   }
 }
 

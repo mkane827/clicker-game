@@ -8,10 +8,9 @@ const BOARD = getEl(".scrum-board");
  *
  * @param p {{
  *  name: string,
- *  cost: number,
+ *  cost: string,
  *  description: string,
  *  action: () => {},
- *  isEquity: boolean,
  *  isDisabled: () => {},
  *  shouldAppear: () => {},
  * }}
@@ -33,11 +32,7 @@ function addToBoard({
   setText(nameEl, name);
 
   const costEl = document.createElement("span");
-  costEl.classList.add("cost");
-  if (isEquity) {
-    costEl.classList.add("equity");
-  }
-  setNumText(costEl, cost);
+  setText(costEl, cost);
 
   const descriptionEl = document.createElement("span");
   descriptionEl.classList.add("description");
@@ -68,7 +63,7 @@ function addToBoard({
 
 addToBoard({
   name: "GET TWO COFOUNDERS",
-  cost: 66,
+  cost: "66% equity",
   description:
     "Get work done faster and split equity equally between all three cofounders",
   action: () => state.lowerTickMultiplier(0.3),
@@ -79,9 +74,12 @@ addToBoard({
 
 addToBoard({
   name: "LEASE OFFICE SPACE",
-  cost: 25000,
+  cost: "$25,000",
   description: "Find your first office space",
-  action: () => {},
+  action: () => {
+    state.spendMoney(25000);
+    state.addMaxEmployees(10);
+  },
   isDisabled: () => state.money < 25000,
   shouldAppear: () => !state.canAddMoreEmployees,
 });

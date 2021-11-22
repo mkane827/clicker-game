@@ -1,6 +1,7 @@
 import state from "./State";
 import { ACTIVITY_TRACKER, setText } from "./elements";
 import { COFOUNDERS_AVAILABLE_LINES_OF_CODE } from "./constants";
+import { exposeHeadOfSales } from "./employees";
 
 /**
  * @param {string} activity
@@ -49,26 +50,27 @@ linesOfCodeActivity(
 linesOfCodeActivity(80, "Apply to the top incubators");
 linesOfCodeActivity(105, "Get rejected from the top incubators");
 linesOfCodeActivity(110, "Perfect your demo and pitch");
+oneTimeActivity(
+  () => state.linesOfCode > 125 && state.money >= 5000,
+  "It's time to make your first hire, pick wisely"
+);
 linesOfCodeActivity(
   130,
   "Lucky break a spot opened in your second choice incubator "
 );
 linesOfCodeActivity(145, "Search for product market fit");
-linesOfCodeActivity(165, "Congradulations you have your first customer");
+linesOfCodeActivity(165, "Congratulations you have your first customer");
 linesOfCodeActivity(
   178,
   "Look for more customers to confirm product market fit"
 );
 linesOfCodeActivity(
   195,
-  "You’re having trouble finding product market fit lines of code now generate 50% less revenue",
+  "You’re having trouble finding product market fit. You're code now generates 50% less revenue",
   () => (state.revenueMultiplier -= 0.5)
 );
 oneTimeActivity(
-  () => state.linesOfCode > 125 && state.money >= 5000,
-  "It's time to make your first hire, pick wisely"
-);
-oneTimeActivity(
-  () => state.linesOfCode > 220 && state.money >= 10000,
-  "You need customers go hire a head of sales"
+  () => state.linesOfCode > 260 && state.money >= 20000,
+  "You need customers go hire a head of sales",
+  () => exposeHeadOfSales()
 );

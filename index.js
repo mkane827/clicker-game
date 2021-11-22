@@ -12,7 +12,7 @@ import {
   getEl,
   showEl,
 } from "./src/elements";
-import { checkEng, nextEngCost, ENGINEER_BUTTON } from "./src/employees";
+import { checkEng, ENGINEER_BUTTON } from "./src/employees";
 import state from "./src/State";
 import { addActivity } from "./src/activityTracker";
 import "./src/scrumBoard";
@@ -38,17 +38,15 @@ PRODUCT_BUTTON.onclick = function () {
 };
 
 DESIGN_BUTTON.onclick = function () {
+  state.designs += 1;
+  setNumText(NUM_DESIGNS, state.designs);
+  setElDisabled(DESIGN_BUTTON, true);
+  setElDisabled(CODE_BUTTON, false);
   if (state.designs < state.products * DESIGNS_PER_FEATURE) {
-    state.designs += 1;
-    setNumText(NUM_DESIGNS, state.designs);
-    setElDisabled(DESIGN_BUTTON, true);
-    setElDisabled(CODE_BUTTON, false);
-    if (state.designs < state.products * DESIGNS_PER_FEATURE) {
-      state.designTimeout = setTimeout(() => {
-        setElDisabled(DESIGN_BUTTON, false);
-        state.designTimeout = false;
-      }, state.tickspeed * state.designs);
-    }
+    state.designTimeout = setTimeout(() => {
+      setElDisabled(DESIGN_BUTTON, false);
+      state.designTimeout = false;
+    }, state.tickspeed * state.designs);
   } else {
     setElDisabled(DESIGN_BUTTON, true);
     addActivity("Uh oh! You ran out of ideas!");
@@ -76,15 +74,15 @@ function addCode(newLines = 1) {
 CODE_BUTTON.onclick = () => addCode(1);
 
 ENGINEER_BUTTON.onclick = function () {
-  state.money -= nextEngCost();
-  setNumText(NUM_ENG, ++state.eng);
-  setNumText(NEXT_ENG_COST, nextEngCost());
+  state.spendMoney(state.nextEngCost);
+  setNumText(NUM_ENG, state.hireEng(1));
+  setNumText(NEXT_ENG_COST, state.nextEngCost);
   showEl(ENG_COUNTER);
   checkEng();
 };
 
 function tick() {
-  state.money += state.linesOfCode * state.revenueMultiplier;
+  state.makeMoneyFromCode();
   setNumText(MONEY_VALUE, state.money);
   addCode(state.eng);
   checkEng();

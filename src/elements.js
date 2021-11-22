@@ -4,6 +4,7 @@ export const NUM_LINES_OF_CODE = getEl(".num-lines-of-code");
 export const NUM_ENG = getEl(".num-eng");
 export const ENG_COUNTER = getEl(".eng-counter");
 export const MONEY_VALUE = getEl(".money-value span");
+export const CUSTOMERS_VALUE = getEl(".customers-value span");
 export const NEXT_ENG_COST = getEl(".next-eng-cost");
 export const ACTIVITY_TRACKER = getEl(".activity-tracker");
 
